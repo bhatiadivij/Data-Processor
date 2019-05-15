@@ -1,6 +1,6 @@
 import os
 import re
-
+import time
 ## Assuming that all the P*.txt files and sample*.txt files are in the same directory as this data_processor.py file
 
 class DataProcessor:
@@ -33,10 +33,12 @@ class DataProcessor:
         pattern = re.compile("\Asample") ## regex to matching the sample* files
         property=[] ## this list will store the list of tuples for every sample* file
         for file in dir:
+            t=time.time()
             if pattern.match(file):
                 with open(file, encoding="utf8") as f:
                     strings = [x.strip() for x in f] ## reading sample* files
                     property.append(self.find_property(strings))  ## evaluate the property for every sample file
+                print(file," : ",time.time()-t)
         ## return or print property list based on the usecase
 
 if __name__ == "__main__":    
