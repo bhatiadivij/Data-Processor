@@ -5,10 +5,10 @@ import re
 
 class DataProcessor:
     def __init__(self):
-        cwd=os.getcwd() ## detecting the current working directory
-        dir = os.listdir(cwd) ## reading the cwd
         self.index = {} ## hash table which stores the srings of all the P* files with keys (filename,string) and value 1
         self.filenames=[] ## list of all P* file names
+        cwd=os.getcwd() ## detecting the current working directory
+        dir = os.listdir(cwd) ## reading the cwd
         pattern = re.compile("\AP") ## regex for matching P* file names
         for file in dir:
             if pattern.match(file):
@@ -24,7 +24,7 @@ class DataProcessor:
             for string in strings: 
                 score += self.index.get((filename, string), 0)
             property.append((filename, score)) ## building the property list 
-        property.sort(key=lambda x: x[1], reverse=True) ## sorting the property list in decresing order of score
+        property.sort(key=lambda x: x[1], reverse=True) ## sorting the property list in decreasing order of score
         return property
 
     def process_input(self):
